@@ -10,7 +10,11 @@ namespace Player
         #region Inputs
         void OnMove(InputValue value)
         {
-            playerControls.moveInput = value.Get<Vector2>();
+            playerControls.Movement(value.Get<Vector2>().x);
+        }
+        void OnSprint(InputValue value)
+        {
+            playerControls.walkSpeed(value.isPressed);
         }
         #endregion
     }

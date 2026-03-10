@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Xml.Xsl;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -5,13 +7,17 @@ public class PlayerControls : MonoBehaviour
 {
     //Players Movement inputs
     public Vector2 moveInput;
+    public bool isSprinting;
 
     //Pathwayhandeling
     private PlayerPath path;
+    private Vector3 travelLocation;
+    
 
     //Player Stats
     [SerializeField][Range(0.1f,10f)] private float playerSpeed;
-    [SerializeField][Range(0.1f, 10f)] private float sprintMulti;
+    [SerializeField][Range(0.1f, 10f)] private float sprintSpeed;
+    [SerializeField] private float currSpeed;
 
     //Player State
     public enum MovementState 
@@ -20,28 +26,48 @@ public class PlayerControls : MonoBehaviour
         Forward,
         Backward,
     }
-    [SerializeField] private MovementState moveState;
+    [SerializeField] public MovementState moveState;
     private void Awake()
     {
         path = GetComponentInParent<PlayerPath>();
+        travelLocation = transform.position;
+        currSpeed = playerSpeed;
     }
-    private void Update()
+    private void Update() //Always moving towards target location
     {
-        if(moveInput.x > 0)
+        transform.position = Vector3.MoveTowards(transform.position, travelLocation, currSpeed * Time.deltaTime);
+    }
+    public void Movement(float xValue)
+    {
+        switch (xValue)
         {
-            transform.position = Vector3.MoveTowards(transform.position, path.endPos.position, playerSpeed * Time.deltaTime);
-            moveState = MovementState.Forward;
+            case -1:
+                travelLocation = path.startPos.position;
+                moveState = MovementState.Backward;
+                break;
+            case 0:
+                moveState = MovementState.Idle;
+                travelLocation = transform.position;
+                break;
+            case 1:
+                travelLocation = path.endPos.position;
+                moveState = MovementState.Forward;
+                break;
         }
-        else if(moveInput.x < 0)
+    }
+    public void walkSpeed(bool sprint)
+    {
+        if (sprint)
         {
-            transform.position = Vector3.MoveTowards(transform.position, path.startPos.position, playerSpeed * Time.deltaTime);
-            moveState = MovementState.Backward;
+            currSpeed =  + sprintSpeed;
+            isSprinting = true;
         }
         else
         {
-            transform.position = transform.position;
-            moveState = MovementState.Idle;
+            currSpeed = playerSpeed;
+            isSprinting = false;
         }
     }
+
 
 }
