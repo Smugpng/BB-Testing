@@ -21,7 +21,7 @@ public class PlayerStats : MonoBehaviour
     {
         if(instance == null)
         {
-            instance = new PlayerStats();
+            instance = this;
         }
         pc = GetComponentInChildren<PlayerControls>();
         InvokeRepeating("SusMeter", .1f, .5f);
@@ -41,7 +41,7 @@ public class PlayerStats : MonoBehaviour
             switch (pc.moveState)
             {
                 case MovementState.Idle:
-                    susMeter += 0;
+                    susMeter += 0.1f;
                     return;
                 case MovementState.Forward:
                     susMeter += (1* cookieMultiplier);
