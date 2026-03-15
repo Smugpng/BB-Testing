@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using UnityEngine.Events;
 using static PlayerControls;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -74,6 +75,8 @@ public class PlayerStats : MonoBehaviour
         susMeter = 0;
         isChecking = true;
         Debug.Log("LOOKING!");
-        Invoke("ResetSus",5f);
+        tellDadtoCheck.Invoke();
+        Invoke("ResetSus",2f);
     }
+    public UnityEvent tellDadtoCheck;
 }

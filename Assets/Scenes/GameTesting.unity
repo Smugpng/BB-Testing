@@ -356,6 +356,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bdf61097a22a33242813e81259729309, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1303619742}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bdf61097a22a33242813e81259729309, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1303619743}
   m_SourcePrefab: {fileID: 100100000, guid: bdf61097a22a33242813e81259729309, type: 3}
 --- !u!4 &620976144 stripped
 Transform:
@@ -426,8 +429,8 @@ Transform:
   m_GameObject: {fileID: 915988518}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 0.01, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 3}
+  m_LocalPosition: {x: -3.75, y: 0.01, z: 0}
+  m_LocalScale: {x: 0.5, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1216040644}
@@ -525,7 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58653b9e468ce0946a3e9ad6a5e2f747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PropPlacement
-  SpawnAmout: 10
+  SpawnAmout: 5
   planeWidth: 10
   planeHeight: 10
   test: {fileID: 1775771022}
@@ -674,9 +677,9 @@ GameObject:
   - component: {fileID: 978230101}
   - component: {fileID: 978230100}
   - component: {fileID: 978230099}
-  m_Layer: 0
-  m_Name: Capsule
-  m_TagString: Untagged
+  m_Layer: 7
+  m_Name: Playerbody
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -834,6 +837,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1303619743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303619741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29aeeeda6be64ac419d54bcca48a9e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Dad
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
+  player: {fileID: 978230097}
+  isPlayerHidden: 0
 --- !u!1 &1348656151
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,7 +921,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 183
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1072,6 +1092,21 @@ MonoBehaviour:
   susMeterMax: 10
   isChecking: 0
   pc: {fileID: 2023225948}
+  tellDadtoCheck:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1303619743}
+        m_TargetAssemblyTypeName: Dad, Assembly-CSharp
+        m_MethodName: CheckPlayer
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1379808349}
+          m_ObjectArgumentAssemblyTypeName: PlayerPath, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1446404226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,7 +1375,7 @@ GameObject:
   - component: {fileID: 2023225946}
   - component: {fileID: 2023225948}
   - component: {fileID: 2023225947}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: --Player--
   m_TagString: Player
   m_Icon: {fileID: 0}

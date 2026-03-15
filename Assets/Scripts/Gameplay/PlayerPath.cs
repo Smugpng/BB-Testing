@@ -3,6 +3,10 @@ public class PlayerPath : MonoBehaviour
 {
     private void Awake()
     {
+        STARTGAME();
+    }
+    public void STARTGAME()
+    {
         player.transform.position = startPos.position;
     }
     public Transform startPos, endPos;
