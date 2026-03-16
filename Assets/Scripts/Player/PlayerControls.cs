@@ -68,6 +68,9 @@ public class PlayerControls : MonoBehaviour
             isSprinting = false;
         }
     }
-
-
+    public void ResetState()
+    {
+        travelLocation = transform.position;
+        currSpeed = playerSpeed;
+    }
 }

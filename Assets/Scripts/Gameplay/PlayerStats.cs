@@ -62,7 +62,11 @@ public class PlayerStats : MonoBehaviour
         }
         else
         {
-            CheckSus();
+            Dad.instance.CheckBuildUp();
+            isChecking = true;
+            susMeter = 0;
+            //Check Build UP
+            //CheckSus();
         }
         
     }
@@ -70,13 +74,4 @@ public class PlayerStats : MonoBehaviour
     {
         isChecking = false;
     }
-    public void CheckSus()
-    {
-        susMeter = 0;
-        isChecking = true;
-        Debug.Log("LOOKING!");
-        tellDadtoCheck.Invoke();
-        Invoke("ResetSus",2f);
-    }
-    public UnityEvent tellDadtoCheck;
 }

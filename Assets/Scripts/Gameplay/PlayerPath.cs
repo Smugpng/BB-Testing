@@ -1,8 +1,13 @@
 using UnityEngine;
 public class PlayerPath : MonoBehaviour
 {
+    public static PlayerPath instance;
     private void Awake()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
         STARTGAME();
     }
     public void STARTGAME()
