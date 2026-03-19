@@ -7,7 +7,7 @@ using static UnityEngine.Rendering.DebugUI;
 public class PlayerStats : MonoBehaviour
 {
     //Suspicion meter and when to check
-    public float susMeter,susMeterMax;
+    public float susMeter, susMeterMax;
 
     //Dad contorls
     [SerializeField] private bool isChecking;
@@ -20,7 +20,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -34,10 +34,10 @@ public class PlayerStats : MonoBehaviour
         isChecking = false;
     }
     public void CookiePickup() { cookieMultiplier = 2f; } //When player picks up cookie and heads back make it harder to get to the end?
- 
+
     public void SusMeter()
     {
-        if(susMeter <= susMeterMax && !isChecking)
+        if (susMeter <= susMeterMax && !isChecking)
         {
             switch (pc.moveState)
             {
@@ -45,7 +45,7 @@ public class PlayerStats : MonoBehaviour
                     susMeter += 0.1f;
                     return;
                 case MovementState.Forward:
-                    susMeter += (1* cookieMultiplier);
+                    susMeter += (1 * cookieMultiplier);
                     break;
                 case MovementState.Backward:
                     susMeter += (.5f * cookieMultiplier);
@@ -56,7 +56,7 @@ public class PlayerStats : MonoBehaviour
                 susMeter += (2 * cookieMultiplier);
             }
         }
-        else if(isChecking)
+        else if (isChecking)
         {
             return;
         }
@@ -68,7 +68,12 @@ public class PlayerStats : MonoBehaviour
             //Check Build UP
             //CheckSus();
         }
-        
+
+    }
+    public float LerpAmount()
+    {
+        float curr = susMeter / susMeterMax;
+        return curr;
     }
     public void ResetSus()
     {
