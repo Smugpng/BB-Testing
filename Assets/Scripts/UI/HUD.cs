@@ -13,6 +13,10 @@ public class HUD : MonoBehaviour
     [SerializeField] private Color green,red;
     private float susLerp;
 
+    [Header("Animator")]
+    public Animator animator;
+    public int State;
+
     public static HUD instance;
 
     public enum CheckingState
@@ -68,11 +72,13 @@ public class HUD : MonoBehaviour
         }
         if (!Dad.instance.isPlayerHidden)
         {
-            hiddenImage.color = red;
+            //hiddenImage.color = red;
+            animator.SetInteger("State", 1);
         }
         else
         {
-            hiddenImage.color = green;
+            //hiddenImage.color = green;
+            animator.SetInteger("State", -1);
         }
     }
     
