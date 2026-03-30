@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class Dad : MonoBehaviour
 {
     public LayerMask mask;
-    public GameObject player;
+    public GameObject player,eyes;
     public bool isPlayerHidden;
     public static Dad instance;
 
@@ -41,6 +41,7 @@ public class Dad : MonoBehaviour
         checking.Invoke();
         if (!isPlayerHidden)
         {
+            PropPlacement.instance.ResetProps();
             PlayerPath.instance.STARTGAME();
             ReturnToNormalPlay();
             LeanTween.rotate(this.gameObject, new Vector3(0, -90, 0), .5f);
@@ -59,16 +60,16 @@ public class Dad : MonoBehaviour
     private void Update()
     {
         RaycastHit hit;
-        if (Physics.Linecast(transform.position, player.transform.position, out hit))
+        if (Physics.Linecast(eyes.transform.position, player.transform.position, out hit))
         {
             if (hit.transform.gameObject.CompareTag("Player"))
             {
-                Debug.DrawLine(transform.position, player.transform.position, Color.green, 2.5f);
+                Debug.DrawLine(eyes.transform.position, player.transform.position, Color.green, 2.5f);
                 isPlayerHidden = false;
             }
             else
             {
-                Debug.DrawLine(transform.position, hit.transform.position, Color.red, 2.5f);
+                Debug.DrawLine(eyes.transform.position, hit.transform.position, Color.red, 2.5f);
                 isPlayerHidden = true;
             }
         }

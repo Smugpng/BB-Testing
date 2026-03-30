@@ -1,6 +1,7 @@
 using Unity.Splines.Examples;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Animations;
 using static UnityEditor.PlayerSettings;
 
 public class PropPlacement : MonoBehaviour
@@ -14,12 +15,22 @@ public class PropPlacement : MonoBehaviour
     [SerializeField] private LayerMask placementLayerMask;
 
     [SerializeField] private GameObject Parent;
-
+    public static PropPlacement instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
     private void Start()
     {
         worldMin = min.transform.position;
         worldMax = max.transform.position;
-
+        StartofGame();      
+    }
+    public void StartofGame()
+    {
         for (int i = 0; i < SpawnAmout; ++i)
         {
             Vector3 spawnPos = SpawnProp();
@@ -46,5 +57,13 @@ public class PropPlacement : MonoBehaviour
             return LastPos;
         }
         return LastPos;
+    }
+    public void ResetProps()
+    {
+        foreach(Transform child in Parent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        StartofGame();
     }
 }
