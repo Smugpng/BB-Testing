@@ -12,6 +12,10 @@ public class PlayerControls : MonoBehaviour
     //Pathwayhandeling
     private PlayerPath path;
     private Vector3 travelLocation;
+
+    //Player Animatiors
+    public Animator animator;
+    public GameObject cat;
     
 
     //Player Stats
@@ -44,14 +48,20 @@ public class PlayerControls : MonoBehaviour
             case -1:
                 travelLocation = path.startPos.position;
                 moveState = MovementState.Backward;
+                animator.SetFloat("Speed", 1);
+
+                cat.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
                 break;
             case 0:
                 moveState = MovementState.Idle;
                 travelLocation = transform.position;
+                animator.SetFloat("Speed", 0);
                 break;
             case 1:
                 travelLocation = path.endPos.position;
                 moveState = MovementState.Forward;
+                cat.transform.rotation = Quaternion.Euler(new Vector3(0, -180, 0));
+                animator.SetFloat("Speed", 1);
                 break;
         }
     }
