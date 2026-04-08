@@ -37,7 +37,7 @@ public class PlayerPath : MonoBehaviour
                 break;
             case GameState.Returning:
                 float distance2 = Vector3.Distance(player.transform.position, startPos.position);
-                if (distance2 <= 0) EndGame();
+                if (distance2 <= 0 && !cookie.activeInHierarchy) EndGame();
                 break;
             case GameState.Menu:
 
@@ -52,6 +52,12 @@ public class PlayerPath : MonoBehaviour
         cookie.SetActive(false);
     }
     public void EndGame()
+    {
+        Debug.LogAssertion("Game Won!");
+        Invoke("HHAHA", 2);
+        
+    }
+    public void HHAHA()
     {
         STARTGAME();
         PropPlacement.instance.ResetProps();
